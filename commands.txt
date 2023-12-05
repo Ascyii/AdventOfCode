@@ -1,6 +1,0 @@
-cargo fmt
-cargo test
-cargo clippy
-cargo read <day>
-cargo test --bin <day> part_one
-cargo all --release --time
