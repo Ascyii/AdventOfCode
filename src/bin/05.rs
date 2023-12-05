@@ -40,8 +40,6 @@ impl AlmanacMap {
             None => source,
         }
     }
-
-    
 }
 
 #[derive(Debug, PartialEq)]
