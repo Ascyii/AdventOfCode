@@ -6,7 +6,9 @@ fn extract_numbers(input_str: &str) -> Vec<(usize, u32)> {
         .filter_map(|(index, c)| {
             if c.is_numeric() {
                 Some((index, c.to_digit(10).unwrap()))
-            } else { None }
+            } else {
+                None
+            }
         })
         .collect()
 }
@@ -15,13 +17,15 @@ fn concatenating_numbers(num1: &u32, num2: &u32) -> u32 {
     let merged_num: u32 = merged_str.parse().unwrap();
     merged_num
 }
-const NUMBER_STRINGS: [&str; 9] = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+const NUMBER_STRINGS: [&str; 9] = [
+    "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+];
 
 advent_of_code::solution!(1);
 
 pub fn part_one(input: &str) -> Option<u32> {
     let mut result: u32 = 0;
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         let numbers = extract_numbers(line);
         // Get the first number
         if let Some((_, first)) = numbers.first() {
@@ -29,15 +33,14 @@ pub fn part_one(input: &str) -> Option<u32> {
                 result += concatenating_numbers(first, last);
             }
         }
-
     }
-    
+
     Some(result)
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
     let mut result: u32 = 0;
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         // Init numbers vec with all numbers
         let mut numbers = extract_numbers(line);
         // Get numbers written out
