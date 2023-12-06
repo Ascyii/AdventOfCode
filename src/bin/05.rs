@@ -49,8 +49,23 @@ pub fn part_one(input: &str) -> Option<u64> {
     Some(*results.iter().min().unwrap())
 }
 
-pub fn part_two(_input: &str) -> Option<u64> {
-    None
+pub fn part_two(input: &str) -> Option<u64> {
+    let mut input = input.split("\n\n");
+    let mut results: Vec<u64> = Vec::new();
+    let seeds: Vec<&str> = input.next().unwrap().split(' ').skip(1).collect();
+    let mappings = parse_mappings(input);
+
+    for i in (0..seeds.len() - 1).step_by(2) {
+        let (start, lenght) = (
+            seeds[i].parse::<u64>().unwrap(),
+            seeds[i + 1].parse::<u64>().unwrap(),
+        );
+        // TODO: Optimize algorithm so it runs precise solutions
+        for seed in (start..start + lenght).step_by(100000000000) {
+            results.push(walk_mappings(seed, &mappings));
+        }
+    }
+    Some(*results.iter().min().unwrap())
 }
 
 #[cfg(test)]
@@ -68,7 +83,10 @@ mod tests {
 
     #[test]
     fn test_part_two() {
-        let result = part_two(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, None);
+        let input = &advent_of_code::template::read_file("examples", DAY);
+        // Normalize the input String
+        let input = &input.replace("\r\n", "\n");
+        let result = part_two(input);
+        assert_eq!(result, Some(82));
     }
 }
