@@ -5,7 +5,7 @@ advent_of_code::solution!(5);
 fn parse_mappings(input: Split<&str>) -> Vec<Vec<(u64, u64, u64)>> {
     let mut maps: Vec<Vec<(u64, u64, u64)>> = Vec::new();
     for map_input in input {
-        let mut map:Vec<(u64, u64, u64)> = Vec::new();
+        let mut map: Vec<(u64, u64, u64)> = Vec::new();
         let lines = map_input.split('\n').skip(1);
         for line in lines {
             let mut line = line.split(' ');
@@ -59,8 +59,11 @@ mod tests {
 
     #[test]
     fn test_part_one() {
-        let result = part_one(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, None);
+        let input = &advent_of_code::template::read_file("examples", DAY);
+        // Normalize the input String
+        let input = &input.replace("\r\n", "\n");
+        let result = part_one(input);
+        assert_eq!(result, Some(35));
     }
 
     #[test]
