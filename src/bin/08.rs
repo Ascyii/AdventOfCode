@@ -93,13 +93,10 @@ pub fn part_two(input: &str) -> Option<u64> {
     let starters: Vec<&str> = mappings
         .clone()
         .keys()
-        .filter(|&&key| key.ends_with("A"))
+        .filter(|&&key| key.ends_with('A'))
         .copied()
         .collect();
     let mut results: Vec<u64> = Vec::new();
-    // Start the loop until we find the ZZZ node
-
-    // Start the loop until we find the ZZZ node
     for starter in starters {
         let mut current = starter.clone();
         let mut count: u64 = 0;
@@ -128,7 +125,7 @@ mod tests {
     #[test]
     fn test_part_one() {
         let result = part_one(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, None);
+        assert_eq!(result, Some(2));
     }
 
     #[test]
@@ -136,6 +133,6 @@ mod tests {
         let result = part_two(&advent_of_code::template::read_file_part(
             "examples", DAY, 2,
         ));
-        assert_eq!(result, None);
+        assert_eq!(result, Some(6));
     }
 }
