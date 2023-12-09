@@ -74,7 +74,7 @@ pub fn part_two(input: &str) -> Option<u64> {
     // Create input split
     let mut input = input.split("\n\n");
     // Create the instruction loop
-    let mut instructions = input.next().unwrap().chars().cycle();
+    let instructions = input.next().unwrap().chars().cycle();
     // Create the mappings in a fast hashmap
     let mappings: HashMap<&str, (&str, &str)> = input
         .next()
@@ -98,13 +98,11 @@ pub fn part_two(input: &str) -> Option<u64> {
         .collect();
     let mut results: Vec<u64> = Vec::new();
     for starter in starters {
+        let mut instr = instructions.clone();
         let mut current = starter.clone();
         let mut count: u64 = 0;
-        while current != starter || count == 0 {
-            if current.ends_with('Z') {
-                break;
-            }
-            let instruction = instructions.next().unwrap();
+        while !current.ends_with('Z') {
+            let instruction = instr.next().unwrap();
             let node = mappings[current];
             if instruction == 'R' {
                 current = node.1;
