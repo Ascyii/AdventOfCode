@@ -60,10 +60,8 @@ pub fn part_one(input: &str) -> Option<i32> {
             })
         })
         .collect();
-     dbg!(&mappings);
     None
 }
-
 pub fn part_two(_input: &str) -> Option<i32> {
     None
 }
